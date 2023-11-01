@@ -8,10 +8,12 @@
 string menuSelection;
 string readAnswer;
 List<string> answerList = new List<string>();
-int x = 0;
-int y = 0;
+int x;
+int y;
 int result;
 string question;
+
+Random random = new Random();
 
 do
 {
@@ -37,10 +39,10 @@ do
         PlayGame("-", Subtraction);
         break;
         case "3":
-        PlayGame("-", Multiplication);
+        PlayGame("*", Multiplication);
         break;
         case "4":
-        //function that do div operations that can only generate int results
+        PlayGame("/", Division);
         break;
         case "5":
         VisualizePreviousGames();
@@ -62,10 +64,10 @@ int Multiplication(int x, int y)
     return x * y;
 }
 
-// int Division(int x, int y)
-// {   
-//     return x / y;
-// }
+int Division(int x, int y)
+{   
+    return x / y;
+}
 
 void VisualizePreviousGames()
 {
@@ -80,23 +82,36 @@ void VisualizePreviousGames()
 
 //The Func<int, int, int> delegate type indicates a method that takes two int parameters and returns an int.
 //The first 'int' is the return type, the second and third 'int are the first and second parameter
+
 void PlayGame(string operatorName, Func<int, int, int> operationFunction)
 {
     do
     {   
         Console.WriteLine($"Type 'back' to go back to the menu");
 
-        x = RandomNumber();
-        y = RandomNumber();
+        x = random.Next(0, 101);
+
+        if (operationFunction == Division)
+        {
+            do
+            {
+                y = random.Next(1, 101);
+            } while (x % y != 0);
+        } else
+        {
+            y = random.Next(0, 101);
+        }
+
         result = operationFunction(x, y);
         question = $"{x} {operatorName} {y} = ?";
         Console.WriteLine(question);
         readAnswer = Console.ReadLine();
-
+;
         if (readAnswer.ToLower() != "back")
         {
             answerList.Add(HistoryOfGames(question, int.Parse(readAnswer), result));
         }
+
  
     } while (readAnswer.ToLower() != "back");
 }
