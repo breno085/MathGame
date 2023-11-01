@@ -3,8 +3,7 @@
 //The results from division should result in INTERGERS ONLY, and dividends should go from 0 to 100
 //Example: Your app shouldn't present the division 7/2 to the user, since it doesn't result in an integer.
 //An random operation is show to the user and he has to type an answer
-//Store the games in a list and have an option to visualize the history of previous games on the menu
-//Extra ?: Option to show results of the games above (user got right or wrong, and right answer if it got right)
+//Record previous games in a list and have an option to visualize the history of previous games on the menu
 
 string menuSelection;
 string readAnswer;
@@ -81,7 +80,6 @@ void VisualizePreviousGames()
 
 //The Func<int, int, int> delegate type indicates a method that takes two int parameters and returns an int.
 //The first 'int' is the return type, the second and third 'int are the first and second parameter
-
 void PlayGame(string operatorName, Func<int, int, int> operationFunction)
 {
     do
