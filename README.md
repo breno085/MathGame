@@ -24,5 +24,8 @@
 - ✅ Create a 'Random Game' option where the players will be presented with questions from random operations
 - ✅ To follow the DRY Principle, try using just one method for all games. Additionally, double check your project and try to find opportunities to achieve the same functionality with less code, avoiding repetition when possible.
 
+- ⬜ AI Challenge:
+ - Enhance your game by enabling users to answer questions using voice input via Azure's Language Services. Step-by-Step: [AI Coffee Ordering System - Azure Speech Recognition Service For Absolute Beginners](https://www.youtube.com/watch?v=XMJS-eQ4Y48)  
+
 
 
