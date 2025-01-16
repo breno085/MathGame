@@ -1,9 +1,4 @@
-﻿
-//Challenges to do:
-//Add a function that let's the user pick the number of questions. (In my code the user can already answer how many questions he wants)
-//Create a 'Random Game' option where the players will be presented with questions from random operations.
-//Try to implement levels of difficulty. (Maybe)
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 string menuSelection;
 string readAnswer;
@@ -65,6 +60,10 @@ do
             Console.WriteLine($"\nYou final score is {scoreRight}/{totalScore}");
             Console.WriteLine("\nPress Enter to continue...");
             Console.ReadLine();
+            break;
+        default:
+        if (menuSelection != "exit")
+            Console.WriteLine("Type a valid option (1-6) or exit.");
             break;
     }
 
@@ -132,7 +131,7 @@ void PlayGame(Func<int, int, int> operationFunction, bool randomGames = false)
     do
     {
         Console.WriteLine("Type 'b' to go back to the menu");
-
+        
         if (randomGames)
             operationFunction = GetRandomOperation();
 

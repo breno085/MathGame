@@ -1,10 +1,12 @@
 # MathGame
 
 ## What i learned
-- Learned to use lists in C# and the diference of it and arrays
+- Learned to use lists in C# and the diference of lists and arrays
 - Delegates: Learned how to pass a method as a parameter for another method using delegates
-- Stopwatch
+- Stopwatch class
+- Random class
 - Reinforced what i previously learned
+- Practise programming logic
 
 ## Requirements
 
