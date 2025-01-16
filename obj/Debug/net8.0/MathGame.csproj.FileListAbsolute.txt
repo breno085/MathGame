@@ -1,0 +1,15 @@
+/home/brenoacioli/Documents/MathGame/bin/Debug/net8.0/MathGame
+/home/brenoacioli/Documents/MathGame/bin/Debug/net8.0/MathGame.deps.json
+/home/brenoacioli/Documents/MathGame/bin/Debug/net8.0/MathGame.runtimeconfig.json
+/home/brenoacioli/Documents/MathGame/bin/Debug/net8.0/MathGame.dll
+/home/brenoacioli/Documents/MathGame/bin/Debug/net8.0/MathGame.pdb
+/home/brenoacioli/Documents/MathGame/obj/Debug/net8.0/MathGame.GeneratedMSBuildEditorConfig.editorconfig
+/home/brenoacioli/Documents/MathGame/obj/Debug/net8.0/MathGame.AssemblyInfoInputs.cache
+/home/brenoacioli/Documents/MathGame/obj/Debug/net8.0/MathGame.AssemblyInfo.cs
+/home/brenoacioli/Documents/MathGame/obj/Debug/net8.0/MathGame.csproj.CoreCompileInputs.cache
+/home/brenoacioli/Documents/MathGame/obj/Debug/net8.0/MathGame.sourcelink.json
+/home/brenoacioli/Documents/MathGame/obj/Debug/net8.0/MathGame.dll
+/home/brenoacioli/Documents/MathGame/obj/Debug/net8.0/refint/MathGame.dll
+/home/brenoacioli/Documents/MathGame/obj/Debug/net8.0/MathGame.pdb
+/home/brenoacioli/Documents/MathGame/obj/Debug/net8.0/MathGame.genruntimeconfig.cache
+/home/brenoacioli/Documents/MathGame/obj/Debug/net8.0/ref/MathGame.dll

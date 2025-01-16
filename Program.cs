@@ -1,16 +1,9 @@
-﻿//Create a math game using the four operations
-//It must show a menu asking the user to choose an operation
-//The results from division should result in INTERGERS ONLY, and dividends should go from 0 to 100
-//Example: Your app shouldn't present the division 7/2 to the user, since it doesn't result in an integer.
-//A random operation is showed to the user and he has to type an answer
-//Record previous games in a list and have an option to visualize the history of previous games on the menu
-
+﻿
 //Challenges to do:
-//Add dates and time
-//Add a timer to track how long the user takes to finish the game.
 //Add a function that let's the user pick the number of questions. (In my code the user can already answer how many questions he wants)
 //Create a 'Random Game' option where the players will be presented with questions from random operations.
 //Try to implement levels of difficulty. (Maybe)
+using System.Diagnostics;
 
 string menuSelection;
 string readAnswer;
@@ -23,6 +16,8 @@ int scoreRight = 0;
 int totalScore = 0;
 string question;
 
+Stopwatch stopwatch = Stopwatch.StartNew();
+
 Random random = new Random();
 
 do
@@ -34,52 +29,90 @@ do
     2 - Subtraction
     3 - Multiplication
     4 - Division
-    5 - Visualise your previous games
+    5 - Random Operations
+    6 - Visualise your previous games and final score
     exit to end the game
     """);
 
     menuSelection = Console.ReadLine();
 
+    if (menuSelection == "exit")
+    {
+        stopwatch.Stop();
+        TimeSpan elapsed = stopwatch.Elapsed;
+        Console.WriteLine($"You took {elapsed.Hours} hours, {elapsed.Minutes} minutes, and {elapsed.Seconds} seconds to finish the game.");
+    }
+
     switch (menuSelection)
     {
         case "1":
-        PlayGame("+", Sum);
-        break;
+            PlayGame(Sum);
+            break;
         case "2":
-        PlayGame("-", Subtraction);
-        break;
+            PlayGame(Subtraction);
+            break;
         case "3":
-        PlayGame("*", Multiplication);
-        break;
+            PlayGame(Multiplication);
+            break;
         case "4":
-        PlayGame("/", Division);
-        break;
+            PlayGame(Division);
+            break;
         case "5":
-        VisualizePreviousGames();
-        Console.WriteLine($"\nYou final score is {scoreRight}/{totalScore}");
-        Console.WriteLine("\nPress Enter to continue...");
-        Console.ReadLine();
-        break;
+            PlayGame(GetRandomOperation(), true);
+            break;
+        case "6":
+            VisualizePreviousGames();
+            Console.WriteLine($"\nYou final score is {scoreRight}/{totalScore}");
+            Console.WriteLine("\nPress Enter to continue...");
+            Console.ReadLine();
+            break;
     }
-            
+
 } while (menuSelection.ToLower() != "exit");
 
-int Sum(int x, int y)
-{   
-    return x + y;
-}
-int Subtraction(int x, int y)
-{   
-    return x - y;
-}
-int Multiplication(int x, int y)
-{   
-    return x * y;
+int Sum(int x, int y) => x + y;
+int Subtraction(int x, int y) => x - y;
+int Multiplication(int x, int y) => x * y;
+int Division(int x, int y) => x / y;
+
+Func<int, int, int> GetRandomOperation()
+{
+    int option = random.Next(1, 5);
+
+    Func<int, int, int> operation = option switch
+    {
+        1 => Sum,
+        2 => Subtraction,
+        3 => Multiplication,
+        4 => Division,
+        _ => throw new InvalidOperationException("Invalid option")
+    };
+
+    return operation;
 }
 
-int Division(int x, int y)
-{   
-    return x / y;
+string GetOperatorName(Func<int, int, int> operationFunction)
+{
+    if (operationFunction == Sum)
+    {
+        return "+";
+    }
+    else if (operationFunction == Subtraction)
+    {
+        return "-";
+    }
+    else if (operationFunction == Multiplication)
+    {
+        return "*";
+    }
+    else if (operationFunction == Division)
+    {
+        return "/";
+    }
+    else
+    {
+        throw new InvalidOperationException("Invalid option");
+    }
 }
 
 void VisualizePreviousGames()
@@ -94,12 +127,16 @@ void VisualizePreviousGames()
 //The Func<int, int, int> delegate type indicates a method that takes two int parameters and returns an int.
 //The first 'int' is the return type, the second and third int are the first and second parameter
 
-void PlayGame(string operatorName, Func<int, int, int> operationFunction)
+void PlayGame(Func<int, int, int> operationFunction, bool randomGames = false)
 {
     do
-    {   
-
+    {
         Console.WriteLine("Type 'b' to go back to the menu");
+
+        if (randomGames)
+            operationFunction = GetRandomOperation();
+
+        string operatorName = GetOperatorName(operationFunction);
 
         x = random.Next(0, 101);
 
@@ -109,7 +146,8 @@ void PlayGame(string operatorName, Func<int, int, int> operationFunction)
             {
                 y = random.Next(1, 101);
             } while (x % y != 0);
-        } else
+        }
+        else
         {
             y = random.Next(0, 101);
         }
@@ -124,7 +162,7 @@ void PlayGame(string operatorName, Func<int, int, int> operationFunction)
             Console.WriteLine("Type a valid integer or 'b' to go back to the menu");
             readAnswer = Console.ReadLine();
         }
-        
+
         if (readAnswer.ToLower() != "b")
         {
             answerList.Add(HistoryOfGames(question, int.Parse(readAnswer), result));
@@ -134,14 +172,15 @@ void PlayGame(string operatorName, Func<int, int, int> operationFunction)
 }
 
 string HistoryOfGames(string question, int answer, int result)
-{   
+{
     string historyOfGames = question;
     if (answer == result)
     {
         historyOfGames += $"\n{result} is the answer. You got it right!";
         scoreRight++;
         totalScore++;
-    } else
+    }
+    else
     {
         historyOfGames += $"\n{result} is the correct answer. You wrote {answer}.";
         totalScore++;
